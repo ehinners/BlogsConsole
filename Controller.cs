@@ -11,6 +11,29 @@ namespace BlogsConsole
     {
         public static void mainLoop()
         {
+            bool stillLooping = true;
+            string input = "";
+            while(stillLooping)
+            {
+                View.displayMainMenu();
+                input = System.Console.ReadLine();
+
+                if(input.ToUpper() == "ESCAPE")
+                {
+                    stillLooping = false;
+                }
+
+                if(input == "doTheThing")
+                {
+                    addBlog();
+                }
+            }
+            
+            
+        }
+
+        public static void addBlog()
+        {
             try
             {
                 //Model.getLogger();
