@@ -33,5 +33,10 @@ namespace BlogsConsole
             return db;
         }
 
+        public static int getNumMainMenuOptions()
+        {
+            return View.getMainMenuOptions().Count;
+        }
+
     }
 }

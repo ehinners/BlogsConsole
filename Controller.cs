@@ -17,11 +17,8 @@ namespace BlogsConsole
             {
                 View.displayMainMenu();
                 input = System.Console.ReadLine();
-
-                if(input.ToUpper() == "ESCAPE")
-                {
-                    stillLooping = false;
-                }                
+               
+                stillLooping = verifyInput(input);                          
 
                 if(input == "1")
                 {
@@ -32,18 +29,36 @@ namespace BlogsConsole
                 {
                     addBlog();
                 }
-            }
-            
-            
+            }           
         }
 
-        public static void addBlog()
+        private static bool verifyInput(string input)
+        {
+            bool verified = false;
+            int value;
+            try
+            {
+                value = int.Parse(input);
+                if(value <= Model.getNumMainMenuOptions())
+                {
+                    verified = true;
+                }
+            }
+            catch
+            {
+                Model.getLogger().Warn("Not Valid Input");
+            }
+
+            return verified;
+        }
+
+        private static void addBlog()
         {
             try
             {
                 //Model.getLogger();
                 // Create and save a new Blog
-                Console.Write("Enter a name for a new Blog: ");
+                View.addBlogPrompt();
                 var name = Console.ReadLine();
 
                 var blog = new Blog { Name = name };

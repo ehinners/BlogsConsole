@@ -25,6 +25,11 @@ namespace BlogsConsole
             }            
         }
 
+        public static List<string> getMainMenuOptions()
+        {
+            return mainMenuOptions;
+        }
+
         public static void listAllBlogs()
         {
             // Display all Blogs from the database
@@ -35,6 +40,11 @@ namespace BlogsConsole
             {
                 Console.WriteLine(item.Name);
             }
+        }
+
+        public static void addBlogPrompt()
+        {
+            Console.Write("Enter a name for a new Blog: ");
         }
 
     }
