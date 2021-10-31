@@ -24,6 +24,13 @@ namespace BlogsConsole
             return logger;
         }
 
+        public static IEnumerable<Blog> getBlogs()
+        {
+            // Display all Blogs from the database
+            var query = Model.GetBloggingContext().Blogs.OrderBy(b => b.Name);
+            return query;
+        }
+
         public static BloggingContext GetBloggingContext()
         {
             if(db==null)

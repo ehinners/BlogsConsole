@@ -14,6 +14,25 @@ namespace BlogsConsole
             this.SaveChanges();
         }
 
+        public Blog getBlog(int blogID)
+        {
+            foreach(Blog b in Blogs)
+            {
+                if(b.BlogId == blogID)
+                {
+                    return b;
+                }
+            }
+            Blog blog = new Blog();
+            return blog;
+        }
+
+        public void AddPost(Post post)
+        {
+            this.Posts.Add(post);
+            this.SaveChanges();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();

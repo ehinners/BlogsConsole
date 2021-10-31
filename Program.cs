@@ -24,7 +24,11 @@ namespace BlogsConsole
             //dotnet ef migrations add CreateDatabase
             //dotnet ef database update
             //bitsql.wctc.edu
-            //dotnet add package Microsoft.Extensions.Configuration --version 5.0.0            
+            //dotnet add package Microsoft.Extensions.Configuration --version 5.0.0    
+
+            // TODO
+            // Add Post function
+            // Add list all posts function        
 
             Model.getLogger().Info("NLOG Loaded");
 

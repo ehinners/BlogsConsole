@@ -29,6 +29,11 @@ namespace BlogsConsole
                 {
                     addBlog();
                 }
+
+                if(input == "3")
+                {
+                    addPost();
+                }
             }           
         }
 
@@ -52,6 +57,74 @@ namespace BlogsConsole
             return verified;
         }
 
+        public static void addPost()
+        {
+            /*
+            int PostId 
+            string Title 
+            string Content 
+            int BlogId 
+            Blog Blog */
+            
+            Post post = new Post();
+            post.Blog = selectBlog();
+            post.BlogId = post.Blog.BlogId;
+            View.addPostTitlePrompt();
+            post.Title = Console.ReadLine();
+            View.addPostContentPrompt();
+            post.Content = Console.ReadLine();          
+
+            try
+            {
+                //Model.getLogger();
+                // Create and save a new Post         
+                
+                Model.GetBloggingContext().AddPost(post);
+                Model.getLogger().Info("Post added - {name}", post.Title);
+            }
+            catch (Exception ex)
+            {
+                Model.getLogger().Error(ex.Message);
+            }
+
+        }
+
+        private static Blog selectBlog()
+        {            
+            string input = "";
+            bool validInput = false;
+            int blogID = 0;
+            while(!validInput)
+            {
+                View.addPostPrompt();
+                View.listAllBlogsWithIDs();
+                input = Console.ReadLine();
+                try
+                {
+                    blogID = int.Parse(input);
+
+                    foreach (var item in Model.getBlogs())
+                    {
+                        if(blogID == item.BlogId)
+                        {
+                            validInput = true;
+                        }
+                    }
+                    if(!validInput)
+                    {
+                        Model.getLogger().Warn("Blog Not Found");
+                    }
+                }
+                catch
+                {
+                    Model.getLogger().Warn("Not vald int");
+                }
+                
+            } 
+
+            return Model.GetBloggingContext().getBlog(blogID);
+        }
+
         private static void addBlog()
         {
             try
@@ -63,8 +136,7 @@ namespace BlogsConsole
 
                 var blog = new Blog { Name = name };
 
-                var db = new BloggingContext();
-                db.AddBlog(blog);
+                Model.GetBloggingContext().AddBlog(blog);
                 Model.getLogger().Info("Blog added - {name}", name);
             }
             catch (Exception ex)

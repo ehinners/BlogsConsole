@@ -33,18 +33,45 @@ namespace BlogsConsole
         public static void listAllBlogs()
         {
             // Display all Blogs from the database
-            var query = Model.GetBloggingContext().Blogs.OrderBy(b => b.Name);
-
             Console.WriteLine("All blogs in the database:");
-            foreach (var item in query)
+            foreach (var item in Model.getBlogs())
             {
                 Console.WriteLine(item.Name);
             }
         }
 
+        public static void listAllBlogsWithIDs()
+        {
+            // Display all Blogs from the database
+            foreach (var item in Model.getBlogs())
+            {
+                Console.WriteLine("Blog ID: " + item.BlogId + " Blog Name: " + item.Name);
+            }
+        }
+
+        public static void listAllPosts()
+        {
+
+        }
+
         public static void addBlogPrompt()
         {
             Console.Write("Enter a name for a new Blog: ");
+        }
+
+        public static void addPostPrompt()
+        {
+            System.Console.WriteLine("Enter the ID of a Blog to Post to: ");
+        }
+
+        public static void addPostTitlePrompt()
+        {
+            Console.WriteLine("Enter The Title Of Your Post");
+        }
+
+        public static void addPostContentPrompt()
+        {
+            Console.WriteLine("Enter The Content Of Your Post");
         }
 
     }
