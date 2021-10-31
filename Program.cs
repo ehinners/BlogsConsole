@@ -24,20 +24,13 @@ namespace BlogsConsole
             //dotnet ef migrations add CreateDatabase
             //dotnet ef database update
             //bitsql.wctc.edu
-            //dotnet add package Microsoft.Extensions.Configuration --version 5.0.0
+            //dotnet add package Microsoft.Extensions.Configuration --version 5.0.0            
 
-            string path = Directory.GetCurrentDirectory() + "\\nlog.config";
+            Model.getLogger().Info("NLOG Loaded");
 
-            // create instance of Logger
-            NLog.Logger logger = NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
-
-            Model.setLogger(logger);
-
-            logger.Info("NLOG Loaded");
-            
             Controller.mainLoop();
 
-            logger.Info("Program ended");
+            Model.getLogger().Info("Program ended");
         }
     }
 }

@@ -21,9 +21,14 @@ namespace BlogsConsole
                 if(input.ToUpper() == "ESCAPE")
                 {
                     stillLooping = false;
+                }                
+
+                if(input == "1")
+                {
+                    View.listAllBlogs();
                 }
 
-                if(input == "doTheThing")
+                if(input == "2")
                 {
                     addBlog();
                 }
@@ -46,15 +51,6 @@ namespace BlogsConsole
                 var db = new BloggingContext();
                 db.AddBlog(blog);
                 Model.getLogger().Info("Blog added - {name}", name);
-
-                // Display all Blogs from the database
-                var query = db.Blogs.OrderBy(b => b.Name);
-
-                Console.WriteLine("All blogs in the database:");
-                foreach (var item in query)
-                {
-                    Console.WriteLine(item.Name);
-                }
             }
             catch (Exception ex)
             {

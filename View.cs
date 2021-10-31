@@ -25,5 +25,17 @@ namespace BlogsConsole
             }            
         }
 
+        public static void listAllBlogs()
+        {
+            // Display all Blogs from the database
+            var query = Model.GetBloggingContext().Blogs.OrderBy(b => b.Name);
+
+            Console.WriteLine("All blogs in the database:");
+            foreach (var item in query)
+            {
+                Console.WriteLine(item.Name);
+            }
+        }
+
     }
 }
