@@ -31,6 +31,13 @@ namespace BlogsConsole
             return query;
         }
 
+        public static IEnumerable<Post> GetPosts(int searchID)
+        {
+            // Display all Posts from the database
+            var query = Model.GetBloggingContext().Posts.Where(p => p.BlogId.Equals(searchID));
+            return query;
+        }
+
         public static BloggingContext GetBloggingContext()
         {
             if(db==null)

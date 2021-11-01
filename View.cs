@@ -49,9 +49,12 @@ namespace BlogsConsole
             }
         }
 
-        public static void listAllPosts()
-        {
-
+        public static void listAllPosts(Blog blog)
+        {            
+            foreach(Post p in Model.GetPosts(blog.BlogId))
+            {
+                System.Console.WriteLine(p.Title);
+            }
         }
 
         public static void addBlogPrompt()

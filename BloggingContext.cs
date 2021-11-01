@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace BlogsConsole
 {
@@ -12,19 +13,6 @@ namespace BlogsConsole
         {
             this.Blogs.Add(blog);
             this.SaveChanges();
-        }
-
-        public Blog getBlog(int blogID)
-        {
-            foreach(Blog b in Blogs)
-            {
-                if(b.BlogId == blogID)
-                {
-                    return b;
-                }
-            }
-            Blog blog = new Blog();
-            return blog;
         }
 
         public void AddPost(Post post)

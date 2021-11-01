@@ -34,6 +34,11 @@ namespace BlogsConsole
                 {
                     addPost();
                 }
+
+                if(input == "4")
+                {
+                    viewPosts();
+                }
             }           
         }
 
@@ -89,6 +94,12 @@ namespace BlogsConsole
 
         }
 
+        private static void viewPosts()
+        {
+            Blog blog = selectBlog();
+            View.listAllPosts(blog);
+        }
+
         private static Blog selectBlog()
         {            
             string input = "";
@@ -122,7 +133,12 @@ namespace BlogsConsole
                 
             } 
 
-            return Model.GetBloggingContext().getBlog(blogID);
+            foreach(Blog b in Model.GetBloggingContext().Blogs.Where(b => b.BlogId.Equals(blogID)))
+            {
+                return b;
+            }
+            Blog blog = new Blog();
+            return blog;
         }
 
         private static void addBlog()

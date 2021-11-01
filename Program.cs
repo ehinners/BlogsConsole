@@ -27,8 +27,7 @@ namespace BlogsConsole
             //dotnet add package Microsoft.Extensions.Configuration --version 5.0.0    
 
             // TODO
-            // Add Post function
-            // Add list all posts function        
+            // Clean Up Output      
 
             Model.getLogger().Info("NLOG Loaded");
 
