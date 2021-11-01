@@ -26,8 +26,9 @@ namespace BlogsConsole
             //bitsql.wctc.edu
             //dotnet add package Microsoft.Extensions.Configuration --version 5.0.0    
 
-            // TODO
-            // Clean Up Output      
+
+
+            // QUESTION: Should Blog OR Post titles not be allowed to be duplicates?  
 
             Model.getLogger().Info("NLOG Loaded");
 

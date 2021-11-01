@@ -19,6 +19,7 @@ namespace BlogsConsole
         };
         public static void displayMainMenu()
         {
+            System.Console.WriteLine("Enter One Of The Following Options, or Anything Else to Exit");
             foreach(string option in mainMenuOptions)
             {
                 System.Console.WriteLine(option);
@@ -43,17 +44,24 @@ namespace BlogsConsole
         public static void listAllBlogsWithIDs()
         {
             // Display all Blogs from the database
-            foreach (var item in Model.getBlogs())
+            foreach (var item in Model.getBlogs().OrderBy(b => b.BlogId))
             {
                 Console.WriteLine("Blog ID: " + item.BlogId + " Blog Name: " + item.Name);
             }
         }
 
         public static void listAllPosts(Blog blog)
-        {            
+        { 
+            System.Console.WriteLine();
+            System.Console.Write("For Blog " + blog.Name +": ");    
+            System.Console.Write("There Are {0} Posts Found", Model.GetPosts(blog.BlogId).Count());      
+            System.Console.WriteLine(); 
             foreach(Post p in Model.GetPosts(blog.BlogId))
             {
-                System.Console.WriteLine(p.Title);
+                System.Console.WriteLine("Blog Name: " + p.Blog.Name);
+                System.Console.WriteLine("Post Title: " + p.Title);
+                System.Console.WriteLine("Post Content: " + p.Content);
+                System.Console.WriteLine();
             }
         }
 
