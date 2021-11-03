@@ -12,18 +12,19 @@ namespace BlogsConsole
         
         private static List<string> mainMenuOptions = new List<string>()
         {
-            "1. Display all blogs",
-            "2. Add Blog",
-            "3. Create Post",
-            "4. Display Posts"
+            "1) Display all blogs",
+            "2) Add Blog",
+            "3) Create Post",
+            "4) Display Posts"
         };
         public static void displayMainMenu()
         {
-            System.Console.WriteLine("Enter One Of The Following Options, or Anything Else to Exit");
+            System.Console.WriteLine("Enter your selection:");
             foreach(string option in mainMenuOptions)
             {
                 System.Console.WriteLine(option);
-            }            
+            } 
+            System.Console.WriteLine("Enter q to quit");           
         }
 
         public static List<string> getMainMenuOptions()
@@ -34,7 +35,7 @@ namespace BlogsConsole
         public static void listAllBlogs()
         {
             // Display all Blogs from the database
-            Console.WriteLine("All blogs in the database:");
+            Console.WriteLine("{0} Blogs returned", Model.getBlogs().Count());
             foreach (var item in Model.getBlogs())
             {
                 Console.WriteLine(item.Name);
@@ -46,7 +47,7 @@ namespace BlogsConsole
             // Display all Blogs from the database
             foreach (var item in Model.getBlogs().OrderBy(b => b.BlogId))
             {
-                Console.WriteLine("Blog ID: " + item.BlogId + " Blog Name: " + item.Name);
+                Console.WriteLine(item.BlogId + ") " + item.Name);
             }
         }
 
@@ -72,7 +73,7 @@ namespace BlogsConsole
 
         public static void addPostPrompt()
         {
-            System.Console.WriteLine("Enter the ID of a Blog to Post to: ");
+            System.Console.WriteLine("Select the blog you would like to post to: ");
         }
 
         public static void addPostTitlePrompt()
