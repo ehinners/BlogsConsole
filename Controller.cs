@@ -10,6 +10,10 @@ namespace BlogsConsole
     public static class Controller
     {
         private static string menuEscape = "q";
+
+
+        // Loops program until user hits enters value equal to menuEscape
+        // Logically dicates methods based on user input
         public static void mainLoop()
         {
             bool stillLooping = true;
@@ -51,6 +55,8 @@ namespace BlogsConsole
             }           
         }
 
+
+        // Makes sure input is a valid int AND within list of acceptable inputs (1-4)
         private static bool verifyInput(string input)
         {
             bool verified = false;
@@ -123,9 +129,6 @@ namespace BlogsConsole
 
         private static void viewPosts()
         {
-            //Blog blog = selectBlog();
-            //View.listAllPosts(blog);
-
             string input = "";
             bool validInput = false;
             int blogID = 0;
@@ -157,9 +160,7 @@ namespace BlogsConsole
                     else if(blogID == 0)
                     {
                         validInput = true;                        
-                    }
-
-                    
+                    }                    
                 }
                 catch
                 {
@@ -175,14 +176,15 @@ namespace BlogsConsole
             }
             else
             {
-                foreach(Blog b in Model.GetBloggingContext().Blogs.Where(b => b.BlogId.Equals(blogID)))
+                foreach(Blog b in Model.getBlogs().Where(b => b.BlogId.Equals(blogID)))
                 {
                     tempblog = b;
                 }
                 View.listSelectedPosts(tempblog);
             }            
-        }
+        }        
 
+        // Returns a Blog object based on a blogID entered by the user
         private static Blog selectBlogAddPost()
         {            
             string input = "";
@@ -216,7 +218,7 @@ namespace BlogsConsole
                 
             } 
 
-            foreach(Blog b in Model.GetBloggingContext().Blogs.Where(b => b.BlogId.Equals(blogID)))
+            foreach(Blog b in Model.getBlogs().Where(b => b.BlogId.Equals(blogID)))
             {
                 return b;
             }
@@ -256,9 +258,7 @@ namespace BlogsConsole
                     }
                     
                 }
-                //Model.getLogger();
                 
-
                 var blog = new Blog { Name = name };
 
                 Model.GetBloggingContext().AddBlog(blog);
