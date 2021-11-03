@@ -51,13 +51,31 @@ namespace BlogsConsole
             }
         }
 
-        public static void listAllPosts(Blog blog)
+        public static void promptAllPosts()
+        {
+            System.Console.WriteLine("0) Posts from all blogs");
+        }
+
+        public static void listSelectedPosts(Blog blog)
         { 
             System.Console.WriteLine();
-            System.Console.Write("For Blog " + blog.Name +": ");    
-            System.Console.Write("{0} Posts Returned", Model.GetPosts(blog.BlogId).Count());      
+            System.Console.Write("{0} Posts Returned", Model.GetSelectedPosts(blog.BlogId).Count());      
             System.Console.WriteLine(); 
-            foreach(Post p in Model.GetPosts(blog.BlogId))
+            foreach(Post p in Model.GetSelectedPosts(blog.BlogId))
+            {
+                System.Console.WriteLine("Blog Name: " + p.Blog.Name);
+                System.Console.WriteLine("Post Title: " + p.Title);
+                System.Console.WriteLine("Post Content: " + p.Content);
+                System.Console.WriteLine();
+            }
+        }
+
+        public static void listAllPosts()
+        {
+            System.Console.WriteLine();
+            System.Console.Write("{0} Posts Returned", Model.GetPosts().Count());      
+            System.Console.WriteLine(); 
+            foreach(Post p in Model.GetPosts())
             {
                 System.Console.WriteLine("Blog Name: " + p.Blog.Name);
                 System.Console.WriteLine("Post Title: " + p.Title);
@@ -74,6 +92,11 @@ namespace BlogsConsole
         public static void addPostPrompt()
         {
             System.Console.WriteLine("Select the blog you would like to post to: ");
+        }
+
+        public static void viewPostPrompt()
+        {
+            System.Console.WriteLine("Select the blog's posts to display: ");
         }
 
         public static void addPostTitlePrompt()

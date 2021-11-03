@@ -31,10 +31,17 @@ namespace BlogsConsole
             return query;
         }
 
-        public static IEnumerable<Post> GetPosts(int searchID)
+        public static IEnumerable<Post> GetSelectedPosts(int searchID)
         {
             // Display all Posts from the database
             var query = Model.GetBloggingContext().Posts.Where(p => p.BlogId.Equals(searchID));
+            return query;
+        }
+
+        public static IEnumerable<Post> GetPosts()
+        {
+            // Display all Posts from the database
+            var query = Model.GetBloggingContext().Posts.OrderBy(p => p.PostId);
             return query;
         }
 

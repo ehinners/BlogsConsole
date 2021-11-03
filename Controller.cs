@@ -86,7 +86,7 @@ namespace BlogsConsole
             bool validPostName = false;
             
             Post post = new Post();
-            post.Blog = selectBlog();
+            post.Blog = selectBlogAddPost();
             post.BlogId = post.Blog.BlogId;
 
             while(!validPostName)
@@ -123,11 +123,67 @@ namespace BlogsConsole
 
         private static void viewPosts()
         {
-            Blog blog = selectBlog();
-            View.listAllPosts(blog);
+            //Blog blog = selectBlog();
+            //View.listAllPosts(blog);
+
+            string input = "";
+            bool validInput = false;
+            int blogID = 0;
+            Blog tempblog = new Blog();
+            while(!validInput)
+            {
+                View.viewPostPrompt();
+                View.promptAllPosts();
+                View.listAllBlogsWithIDs();
+                input = Console.ReadLine();
+                try
+                {
+                    blogID = int.Parse(input);
+
+                    if(blogID != 0)
+                    {
+                        foreach (var item in Model.getBlogs())
+                        {
+                            if(blogID == item.BlogId)
+                            {
+                                validInput = true;
+                            }
+                        }
+                        if(!validInput)
+                        {
+                            Model.getLogger().Error("There are no Blogs saved with that Id");
+                        }
+                    }
+                    else if(blogID == 0)
+                    {
+                        validInput = true;                        
+                    }
+
+                    
+                }
+                catch
+                {
+                    Model.getLogger().Error("Invalid Blog Id");
+                }
+                
+            }
+
+
+            if(blogID == 0) 
+            {
+                View.listAllPosts();
+            }
+            else
+            {
+                foreach(Blog b in Model.GetBloggingContext().Blogs.Where(b => b.BlogId.Equals(blogID)))
+                {
+                    tempblog = b;
+                }
+                View.listSelectedPosts(tempblog);
+            }            
         }
 
-        private static Blog selectBlog()
+        private static Blog selectBlogAddPost()
         {            
             string input = "";
             bool validInput = false;
