@@ -70,12 +70,26 @@ namespace BlogsConsole
             string Content 
             int BlogId 
             Blog Blog */
+            bool validPostName = false;
             
             Post post = new Post();
             post.Blog = selectBlog();
             post.BlogId = post.Blog.BlogId;
-            View.addPostTitlePrompt();
-            post.Title = Console.ReadLine();
+
+            while(!validPostName)
+            {
+                View.addPostTitlePrompt();
+                post.Title = Console.ReadLine();
+                if(post.Title.Length > 0)
+                {
+                    validPostName = true;
+                }
+                else
+                {
+                    Model.getLogger().Error("Post title cannot be null");
+                }
+            }
+            
             View.addPostContentPrompt();
             post.Content = Console.ReadLine();          
 

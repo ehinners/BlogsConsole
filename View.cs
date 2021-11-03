@@ -55,7 +55,7 @@ namespace BlogsConsole
         { 
             System.Console.WriteLine();
             System.Console.Write("For Blog " + blog.Name +": ");    
-            System.Console.Write("There Are {0} Posts Found", Model.GetPosts(blog.BlogId).Count());      
+            System.Console.Write("{0} Posts Returned", Model.GetPosts(blog.BlogId).Count());      
             System.Console.WriteLine(); 
             foreach(Post p in Model.GetPosts(blog.BlogId))
             {
@@ -78,12 +78,12 @@ namespace BlogsConsole
 
         public static void addPostTitlePrompt()
         {
-            Console.WriteLine("Enter The Title Of Your Post");
+            Console.WriteLine("Enter The Post Title");
         }
 
         public static void addPostContentPrompt()
         {
-            Console.WriteLine("Enter The Content Of Your Post");
+            Console.WriteLine("Enter The Post Content");
         }
 
     }
