@@ -9,6 +9,7 @@ namespace BlogsConsole
 {  
     public static class Controller
     {
+        private static string menuEscape = "q";
         public static void mainLoop()
         {
             bool stillLooping = true;
@@ -18,7 +19,15 @@ namespace BlogsConsole
                 View.displayMainMenu();
                 input = System.Console.ReadLine();
                
-                stillLooping = verifyInput(input);                          
+                if(input.ToUpper() != menuEscape.ToUpper())
+                {
+                    verifyInput(input);   
+                }
+                else
+                {
+                    stillLooping = false;
+                }
+                                       
 
                 if(input == "1")
                 {
@@ -53,10 +62,14 @@ namespace BlogsConsole
                 {
                     verified = true;
                 }
+                else
+                {
+                    Model.getLogger().Warn("Command Not Found");
+                }
             }
             catch
             {
-                Model.getLogger().Warn("Not Valid Input");
+                Model.getLogger().Error("Not Valid Input");
             }
 
             return verified;
@@ -137,12 +150,12 @@ namespace BlogsConsole
                     }
                     if(!validInput)
                     {
-                        Model.getLogger().Warn("Blog Not Found");
+                        Model.getLogger().Error("There are no Blogs saved with that Id");
                     }
                 }
                 catch
                 {
-                    Model.getLogger().Warn("Not vald int");
+                    Model.getLogger().Error("Invalid Blog Id");
                 }
                 
             } 
