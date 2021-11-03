@@ -141,14 +141,32 @@ namespace BlogsConsole
             return blog;
         }
 
+        private static bool isBlogNameDuplicate(string blogName)
+        {
+            bool uniqueName = Model.getBlogs().Where(bn => bn.Name == blogName).Count() == 0 ? true : false;
+
+            return uniqueName;
+        }
+
         private static void addBlog()
         {
             try
             {
+                bool uniqueName = false;
+                var name = "";
+                while(!uniqueName)
+                {
+                    // Create and save a new Blog
+                    View.addBlogPrompt();
+                    name = Console.ReadLine();
+                    uniqueName = isBlogNameDuplicate(name);
+                    if(!uniqueName)
+                    {
+                        Model.getLogger().Error("Blog Name Not Unique");
+                    }
+                }
                 //Model.getLogger();
-                // Create and save a new Blog
-                View.addBlogPrompt();
-                var name = Console.ReadLine();
+                
 
                 var blog = new Blog { Name = name };
 
