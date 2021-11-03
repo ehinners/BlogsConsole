@@ -152,18 +152,26 @@ namespace BlogsConsole
         {
             try
             {
-                bool uniqueName = false;
+                bool validName = false;
                 var name = "";
-                while(!uniqueName)
+                while(!validName)
                 {
                     // Create and save a new Blog
                     View.addBlogPrompt();
                     name = Console.ReadLine();
-                    uniqueName = isBlogNameDuplicate(name);
-                    if(!uniqueName)
+                    if(name.Length > 0)
                     {
-                        Model.getLogger().Error("Blog Name Not Unique");
+                        validName = isBlogNameDuplicate(name);
+                        if(!validName)
+                        {
+                            Model.getLogger().Error("Blog Name Not Unique");
+                        }
                     }
+                    else
+                    {
+                        Model.getLogger().Error("Blog Name cannot be null");
+                    }
+                    
                 }
                 //Model.getLogger();
                 
